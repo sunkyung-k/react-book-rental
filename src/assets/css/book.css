@@ -176,6 +176,11 @@ body {
   background-color: var(--color-card-bg);
   border-radius: 8px;
 }
+
+.list input[type="checkbox"]:disabled + label {
+  text-decoration: line-through;
+  opacity: 0.4;
+}
 .list label {
   cursor: pointer;
 }
