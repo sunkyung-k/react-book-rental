@@ -9,10 +9,14 @@ function BookLayout(props) {
   const [currentUser, setCurrentUser] = useState("");
   const [myName, setMyName] = useState("");
   const [inputValue, setInputValue] = useState("");
+
+  // 도서 목록
   const [books, setBooks] = useState([
     { book: "책제목1", name: "", chk: false },
     { book: "책제목2", name: "", chk: false },
   ]);
+
+  // 대여한 도서 목록
   const [myBooks, setMyBooks] = useState([
     { book: "책제목1_선경", name: "김선경", chk: false },
     { book: "책제목2_선경", name: "김선경", chk: false },
@@ -81,8 +85,6 @@ function BookLayout(props) {
       ...prev.filter((prev) => !checked.some((c) => c.book === prev.book)),
       ...checked.map((prev) => ({ ...prev, chk: false, name: "" })),
     ]);
-
-    console.log("반납 완료!");
   };
 
   // 삭제
@@ -110,24 +112,23 @@ function BookLayout(props) {
         />
 
         {myName !== "" && (
-          <div>
-            <CurrentBooksList
-              myBooks={myBooks.filter((item) => item.name === myName)}
-              evtReturn={evtReturn}
-              setMyBooks={setMyBooks}
-            />
-            <BooksList
-              books={books}
-              evtAdd={evtAdd}
-              evtRental={evtRental}
-              evtDelete={evtDelete}
-              inputValue={inputValue}
-              setInputValue={setInputValue}
-              setBooks={setBooks}
-              toggleBookCheck={toggleBookCheck}
-            />
-          </div>
+          <CurrentBooksList
+            myBooks={myBooks.filter((item) => item.name === myName)} // 내가 선택한 users에 맞게 myBook 뿌리기
+            evtReturn={evtReturn}
+            setMyBooks={setMyBooks}
+          />
         )}
+
+        <BooksList
+          books={books}
+          evtAdd={evtAdd}
+          evtRental={evtRental}
+          evtDelete={evtDelete}
+          inputValue={inputValue}
+          setInputValue={setInputValue}
+          setBooks={setBooks}
+          toggleBookCheck={toggleBookCheck}
+        />
       </main>
     </>
   );

@@ -7,7 +7,12 @@ function CurrentBooksList({ myBooks, setMyBooks, evtReturn }) {
         <div className="top">
           <h3>대여한 도서 목록</h3>
           <div className="btn-box">
-            <button type="button" className="btn btn-dark" onClick={evtReturn}>
+            <button
+              type="button"
+              className="btn btn-dark"
+              onClick={evtReturn}
+              disabled={!myBooks.some((book) => book.chk)}
+            >
               반납
             </button>
           </div>
